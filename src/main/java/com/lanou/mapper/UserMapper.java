@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
-
+    User findById(@Param("id") Integer id);
+    User findBypassword(User user);
+    void addUser(User user);
 
 }
