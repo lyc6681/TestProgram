@@ -14,7 +14,7 @@ public class MainController {
     public String frontPage(){
 
 
-        return "user/login";
+        return "users/login";
     }
 
 
