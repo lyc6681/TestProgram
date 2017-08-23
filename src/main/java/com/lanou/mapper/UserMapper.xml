@@ -3,7 +3,7 @@
 <mapper namespace="com.lanou.mapper.UserMapper">
 
 
-    <resultMap id="UserMap" type="User">
+    <resultMap id="UserMap1" type="User">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="password" property="password"/>
@@ -14,13 +14,22 @@
         <collection property="blogs" column="id" select="com.lanou.mapper.BlogMapper.findByUId"/>
     </resultMap>
 
+    <resultMap id="UserMap2" type="User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <result column="level" property="level"/>
+        <result column="des" property="des"/>
+        <result column="tel" property="tel"/>
+        <result column="address" property="address"/>
+    </resultMap>
 
 
-    <select id="findById" resultMap="UserMap" parameterType="Integer">
+    <select id="findById" resultMap="UserMap2" parameterType="Integer">
         SELECT * FROM b_user WHERE id = #{id}
     </select>
 
-    <select id="findBypassword" resultMap="UserMap">
+    <select id="findBypassword" resultMap="UserMap1">
         SELECT * FROM b_user WHERE name = #{name} and password = #{password}
     </select>
 

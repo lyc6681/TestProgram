@@ -13,5 +13,9 @@ import java.util.List;
 public interface BlogMapper {
 
     List<Blog> findByUId(@Param("id")Integer id);
+    void deleteBlog(@Param("blogId")Integer id);
+    int update(Blog blog);
+    void addBlog(Blog blog);
+    List<Blog> findByInfo(@Param("id")Integer id,String string);
 
 }
