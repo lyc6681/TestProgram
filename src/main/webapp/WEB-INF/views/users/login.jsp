@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control"name="loginname" id="inputEmail3" placeholder="loginname">
+                    <input type="text" class="form-control"name="name" id="inputEmail3" placeholder="loginname">
                 </div>
             </div>
             <div class="form-group">

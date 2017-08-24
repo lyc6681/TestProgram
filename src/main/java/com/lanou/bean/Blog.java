@@ -8,7 +8,7 @@ public class Blog {
     private Integer id;
     private String title;
     private String des;
-    private String context;
+    private String content;
     private User user;
 
     @Override
@@ -17,7 +17,7 @@ public class Blog {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", des='" + des + '\'' +
-                ", context='" + context + '\'' +
+                ", content='" + content + '\'' +
                 ", user=" + user +
                 '}';
     }
@@ -46,12 +46,12 @@ public class Blog {
         this.des = des;
     }
 
-    public String getContext() {
-        return context;
+    public String getContent() {
+        return content;
     }
 
-    public void setContext(String context) {
-        this.context = context;
+    public void setContent(String context) {
+        this.content = content;
     }
 
     public User getUser() {
