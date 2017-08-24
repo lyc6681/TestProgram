@@ -12,42 +12,51 @@
     <title>登录</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.js" type="text/javascript"></script>
+    <style>
+        .col-center-block {
+            float: none;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="col-md-6 col-md-offset-3">
-        <form class="form-horizontal" action="/login" method="post">
+<div class="container col-md-3 col-center-block">
+    <div class="container table table-bordered">
+        <h4>登录</h4>
+        <hr>
+        <form action="/login" method="post">
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control"name="name" id="inputEmail3" placeholder="loginname">
+                <label for="InputUsername">用户名</label>
+                <input type="text" class="form-control" name="name"
+                       id="InputUsername" placeholder="请输入用户名">
+            </div>
+            <div class="form-group">
+                <label for="InputPassword">密码</label>
+                <input type="password" class="form-control" name="password"
+                       id="InputPassword" placeholder="请输入密码">
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> 自动登录
+                    </label>
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control"name="password" id="inputPassword3" placeholder="password">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Remember me
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Sign in</button>
-                </div>
+                <button type="submit" class="btn btn-default">登录</button>
+                <button id="btn" class="btn btn-default" type="button">注册</button>
             </div>
         </form>
     </div>
-
 </div>
-
-
 </body>
+<script>
+    $("#btn").click(function () {
+        $.ajax({
+            url: "/toRegister"})
+    });
+
+</script>
 </html>
