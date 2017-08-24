@@ -22,7 +22,7 @@
         SELECT * FROM b_blog WHERE userId = #{id}
     </select>
 
-    <delete id="deleteBlog" parameterType="Integer">
+    <delete id="deleteBlog" parameterType="Integer" >
         DELETE FROM b_blog WHERE id = #{id}
     </delete>
 

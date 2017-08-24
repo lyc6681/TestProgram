@@ -7,14 +7,14 @@ import java.util.Set;
  */
 public class User {
 
-    private Integer id;
-    private String name;
-    private String password;
-    private Integer level;
+    private Integer id;//用户ID
+    private String name;//用户名
+    private String password;//密码
+    private Integer level;//用户等级
     private String des;
-    private String tel;
-    private String address;
-    private Set<Blog> blogs;
+    private String tel;//电话
+    private String address;//地址
+    private Set<Blog> blogs;//博客关联关系
 
     @Override
     public String toString() {

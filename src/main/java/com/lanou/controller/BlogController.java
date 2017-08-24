@@ -21,21 +21,22 @@ public class BlogController {
 
     @Resource
     private BlogService blogService;
-
+    //查找全部
     @RequestMapping(value = "/shwoBlogs")
     @ResponseBody
     public List<Blog> showBlogs(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("account");
-        List<Blog> blogs = blogService.findByUId(user.getId());
-        return blogs;
+        return blogService.findByUId(user.getId());
     }
-
+    //删除
     @RequestMapping(value = "/deleteBlog")
-    public String delete(@Param("blogId") Integer id) {
+    @ResponseBody
+    public String delete(@RequestParam("blogId") Integer id) {
+        System.out.println(id);
         blogService.deleteBlog(id);
-        return "users/index";
+        return null;
     }
-
+    //修改
     @RequestMapping(value = "/updateBlog")
     public String updateBlog(Blog blog, HttpServletRequest request) {
         if (blog.getId() == null) {
@@ -45,8 +46,9 @@ public class BlogController {
         } else {
             return blogService.update(blog);
         }
-        return "users/index";
+        return "blogs/showblogs";
     }
+    //高级搜索
     @RequestMapping(value = "/search")
     @ResponseBody
     public List<Blog> findByInfo(@RequestParam("search")String str,HttpServletRequest request){
@@ -54,6 +56,17 @@ public class BlogController {
         List<Blog> blogs = blogService.findByInfo(user.getId(), str);
         return blogs;
     }
+    //去添加
+    @RequestMapping(value = "/toAddBlogs")
+    public String toAddBlogs(){
+        return "blogs/addblogs";
+    }
+    //返回跳转
+    @RequestMapping(value = "/toBlogs")
+    public String toBlogs(){
+        return "blogs/showblogs";
+    }
+
 
 
 }

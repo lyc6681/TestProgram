@@ -14,7 +14,7 @@
 </head>
 <body>
 <%--导航条--%>
-<body>
+
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -29,17 +29,17 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/addBlogPage">新建博客</a></li>
+                <li><a href="toAddBlogs">新建博客</a></li>
             </ul>
-            <form class="navbar-form navbar-left">
+            <form class="navbar-form navbar-left" method="post" action="/search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="输入搜索的内容">
                 </div>
                 <button type="submit" class="btn btn-default">提交</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">管理员</a></li>
-                <li><a href="#">切换用户</a></li>
+                <li><a href="#">${account.name}</a></li>
+                <li><a href="/login">切换用户</a></li>
             </ul>
         </div>
     </div>
@@ -49,15 +49,16 @@
 
 <div class="container">
     <table id="tab" class="table table-bordered">
+        <thead>
         <tr>
             <th><strong>博客标题</strong></th>
             <th><strong>博客描述</strong></th>
             <th><strong>操作</strong></th>
         </tr>
-        <td>
+        </thead>
+        <tbody id="tbody">
 
-
-        </td>
+        </tbody>
     </table>
 </div>
 
@@ -83,6 +84,57 @@
     </nav>
 </div>
 </body>
+<script>
+    function addBolg(id, title, des) {
+        var tdLeft = $("<td></td>");
+        var tdMid = $("<td></td>").html("<p>" + des + "</p>");
+        var tdRight = $("<td></td>");
+        $("<a href='#'>" + title + "</a>").appendTo(tdLeft).attr("showId", id).click(check);
+        $("<a href='#'>删除</a>").appendTo(tdRight).attr("delId", id).click(del);
+        var tr = $("<tr></tr>").append(tdLeft).append(tdMid).append(tdRight).attr("id", "tr" + id);
 
-</body>
+        $("#tbody").append(tr);
+    }
+
+    var check = function () {
+        var tid = $(this).attr("showId");
+        $.ajax({
+            url: "/",
+            data: {tid: tid},
+            success: function (result) {
+                window.location.href = "/blogs?title=" + result.title + "&content=" + result.content;
+            }
+        })
+    };
+
+    function showBlogs() {
+        //从服务器请求数据到前端页面
+        $.ajax({
+            url: "/shwoBlogs",
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    //遍历返回的数据,一次在table中添加一行
+                    var msg = result[i];
+                    addBolg(msg.id, msg.title, msg.des)
+                }
+            }
+        })
+    }
+    showBlogs();
+
+    var del = function () {
+        // 拿到a标签的id值
+        var blogId = $(this).attr("delId");
+        // 将要删除的id发送给后台处理
+        $.ajax({
+            url: "/deleteBlog",
+            data: {
+                id: blogId
+            },
+            success: function () {
+                window.location.reload();
+            }
+        })
+    }
+</script>
 </html>

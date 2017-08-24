@@ -3,7 +3,6 @@ package com.lanou.controller;
 import com.lanou.bean.User;
 import com.lanou.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -23,7 +22,7 @@ public class UserController {
         }else {
             User user1 = userService.findBypassword(user);
             request.getSession().setAttribute("account",user1);
-            return "users/index";
+            return "blogs/showblogs";
         }
     }
 
