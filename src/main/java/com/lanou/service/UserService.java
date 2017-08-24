@@ -7,4 +7,9 @@ import com.lanou.bean.User;
  */
 public interface UserService {
 
+
+    User findBypassword(User user);
+    boolean addUser(User user);
+
+
 }
