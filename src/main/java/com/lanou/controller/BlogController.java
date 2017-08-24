@@ -31,7 +31,7 @@ public class BlogController {
     //删除
     @RequestMapping(value = "/deleteBlog")
     @ResponseBody
-    public String delete(@RequestParam("blogId") Integer id) {
+    public Blog delete(@RequestParam("id") Integer id) {
         System.out.println(id);
         blogService.deleteBlog(id);
         return null;

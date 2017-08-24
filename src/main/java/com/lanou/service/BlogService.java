@@ -11,7 +11,7 @@ import java.util.List;
 public interface BlogService {
 
     List<Blog> findByUId(@Param("id")Integer id);
-    void deleteBlog(Integer id);
+    Integer deleteBlog(Integer id);
     String update(Blog blog);
     void addBlog(Blog blog);
     List<Blog> findByInfo(@Param("id")Integer id,String string);

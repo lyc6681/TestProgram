@@ -22,8 +22,9 @@ public class BlogServiceImpl implements BlogService {
         return byUId;
     }
 
-    public void deleteBlog(Integer id) {
+    public Integer deleteBlog(Integer id) {
         mapper.deleteBlog(id);
+        return id;
     }
 
     public String update(Blog blog) {
