@@ -15,4 +15,5 @@ public interface BlogService {
     String update(Blog blog);
     void addBlog(Blog blog);
     List<Blog> findByInfo(@Param("id")Integer id,String string);
+    Blog findById(@Param("id")Integer id);
 }

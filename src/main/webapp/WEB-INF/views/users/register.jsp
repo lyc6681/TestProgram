@@ -34,11 +34,11 @@
                    id="InputPassword" placeholder="请输入密码">
             <br>
             <label for="InputRepetition">重复密码</label>
-            <input type="repetition" class="form-control" name="repetition"
+            <input type="password" class="form-control" name="repetition"
                    id="InputRepetition" placeholder="请再次输入密码">
             <br>
             <label for="InputTelephone">电话</label>
-            <input type="telephone" class="form-control" name="telephone"
+            <input type="telephone" class="form-control" name="tel"
                    id="InputTelephone" placeholder="请输入常用电话">
             <br>
             <label for="InputAddress">地址</label>

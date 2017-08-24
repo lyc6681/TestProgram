@@ -12,7 +12,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.js" type="text/javascript"></script>
 </head>
-<body>
+
 <%--导航条--%>
 <body>
 <nav class="navbar navbar-default">
@@ -29,17 +29,17 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/addBlogPage">新建博客</a></li>
+                <li><a href="/toAddBlog">新建博客</a></li>
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="输入搜索的内容">
+                    <input type="text" id="searchInfo" class="form-control" placeholder="输入搜索的内容">
                 </div>
-                <button type="submit" class="btn btn-default">提交</button>
+                <button id="Sbtn" type="button" class="btn btn-default">提交</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">管理员</a></li>
-                <li><a href="#">切换用户</a></li>
+                <li><a href="#">${account.name}</a></li>
+                <li><a href="/checkout">切换用户</a></li>
             </ul>
         </div>
     </div>
@@ -54,10 +54,7 @@
             <th><strong>博客描述</strong></th>
             <th><strong>操作</strong></th>
         </tr>
-        <td>
 
-
-        </td>
     </table>
 </div>
 
@@ -83,6 +80,74 @@
     </nav>
 </div>
 </body>
+<script>
+    function addNewTR(id,title, des, content) {
 
-</body>
+        var tdleft = $("<td></td>")
+        $("<a href='/showInfo?mid="+ id +"'></a>").html(title).appendTo(tdleft).attr("num",id).click(showInfo)
+        var tdmid = $("<td></td>").html("<p>"+des+"</p>")
+        var tdright = $("<td></td>")
+        $("<a href='#'>删除</a>").appendTo(tdright).attr("num",id).click(delfunc)
+        tdright.append("    ")
+        $("<a href='/toUpdateBlog?mid="+ id +"'>修改</a>").appendTo(tdright).attr("num",id)
+        var trOb = $("<tr class='binfo'></tr>").append(tdleft).append(tdmid).append(tdright).attr("id","ss"+id)
+        $("#tab").append(trOb)
+    }
+
+    function getAllMessage() {
+        $.ajax({
+            url:"/shwoBlogs",
+            success:function (result) {
+                for(var i = 0; i < result.length;i++){
+                    //遍历返回的数据,依次在table中添加一行
+                    var msg = result[i]
+                    addNewTR(msg.id,msg.title,msg.des,msg.content)
+                }
+            }
+        })
+    }
+    $("#Sbtn").click(function () {
+        $.ajax({
+            url:"/search",
+            type:"get",
+            data:{
+                searchInfo:$("#searchInfo").val()
+            },
+            success:function (result) {
+                $(".binfo").remove();
+                for(var i = 0; i < result.length;i++){
+                    var msg = result[i]
+                    addNewTR(msg.id,msg.title,msg.des,msg.content)
+                }
+            }
+        })
+    })
+    var delfunc = function () {
+        var aid = $(this).attr("num");
+        $.ajax({
+            url:"/deleteBlog",
+            type:"get",
+            data:{
+                mid:aid
+            }
+        })
+        window.location.reload(true)
+    }
+
+    var showInfo = function () {
+        var aid = $(this).attr("num");
+        $.ajax({
+            url:"/showInfo",
+            type:"get",
+            data:{
+                mid:aid
+            }
+        })
+    }
+
+
+
+    getAllMessage()
+</script>
+
 </html>
