@@ -60,19 +60,18 @@
 
 <div class="container" align="center">
     <nav aria-label="Page navigation">
-        <ul class="pagination">
+        <ul id="pageTag" class="pagination">
             <li>
                 <a href="#" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
+            <%--<li class="active"><a href="#">1</a></li>--%>
+            <%--<li><a href="#">2</a></li>--%>
+            <%--<li><a href="#">3</a></li>--%>
+            <%--<li><a href="#">4</a></li>--%>
+            <%--<li><a href="#">5</a></li>--%>
+            <li><a href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
@@ -94,18 +93,29 @@
         $("#tab").append(trOb)
     }
 
+    function addPages(pageNum) {
+        var mid = $("<li class='pinfo'></li>")
+        $("<a href='/TshwoBlogs?pmid="+ pageNum +"'></a>").html(pageNum).appendTo(mid)
+        $("#pageTag").append(mid)
+    }
+
     function getAllMessage() {
         $.ajax({
-            url:"/shwoBlogs",
+           url:"/TshwoBlogs",
             success:function (result) {
-                for(var i = 0; i < result.length;i++){
+                for(var i = 0; i < result.list.length;i++){
                     //遍历返回的数据,依次在table中添加一行
-                    var msg = result[i]
+                    var msg = result.list[i]
                     addNewTR(msg.id,msg.title,msg.des,msg.content)
+                }
+                for(var i = 0; i < 3;i++){
+                    var pmsg = i+1
+                    addPages(pmsg)
                 }
             }
         })
     }
+
     $("#Sbtn").click(function () {
         $.ajax({
             url:"/search",
@@ -122,6 +132,7 @@
             }
         })
     })
+
     var delfunc = function () {
         var aid = $(this).attr("num");
         $.ajax({
@@ -144,8 +155,6 @@
             }
         })
     }
-
-
 
     getAllMessage()
 </script>

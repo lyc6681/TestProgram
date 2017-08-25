@@ -1,5 +1,6 @@
 package com.lanou.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.lanou.bean.Blog;
 import com.lanou.bean.User;
 import com.lanou.service.BlogService;
@@ -29,6 +30,15 @@ public class BlogController {
         User user = (User) request.getSession().getAttribute("account");
         List<Blog> blogs = blogService.findByUId(user.getId());
         return blogs;
+    }
+    @RequestMapping(value = "/TshwoBlogs")
+    @ResponseBody
+    public PageInfo<Blog> TshowBlogs(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("account");
+        PageInfo<Blog> pageInfo = blogService.TfindByUId(user.getId(), 1, 2);
+        System.out.println(pageInfo);
+        System.out.println(pageInfo.getList());
+        return pageInfo;
     }
 
     @RequestMapping(value = "/deleteBlog")

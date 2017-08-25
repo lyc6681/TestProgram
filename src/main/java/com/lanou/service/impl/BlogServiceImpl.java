@@ -1,5 +1,7 @@
 package com.lanou.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lanou.bean.Blog;
 import com.lanou.mapper.BlogMapper;
 import com.lanou.service.BlogService;
@@ -19,6 +21,16 @@ public class BlogServiceImpl implements BlogService {
 
     public List<Blog> findByUId(Integer id) {
         return mapper.findByUId(id);
+    }
+
+    public PageInfo<Blog> TfindByUId(Integer id,Integer pageNum, Integer pageSize) {
+
+        pageNum = pageNum == null ? 1 : pageNum;
+        pageSize = pageSize == null ? 2 : pageSize;
+        PageHelper.startPage(pageNum,pageSize);
+        List<Blog> blogs = mapper.findByUId(id);
+        PageInfo<Blog> pageInfo = new PageInfo<Blog>(blogs);
+        return pageInfo;
     }
 
     public void deleteBlog(Integer id) {
