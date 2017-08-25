@@ -24,26 +24,28 @@
 <br>
 <br>
 <div class="container">
-    <form class="form-horizontal">
+    <form class="form-horizontal" action="/updateBlog" method="post">
         <div class="form-group">
             <label for="inputHeadline" class="col-sm-2">标题</label>
             <div class="col-sm-10">
-                <input type="headline" class="form-control" id="inputHeadline" placeholder=" ">
+                <input type="text" class="form-control" name="title"
+                       id="inputHeadline" placeholder=" ">
             </div>
         </div>
         <hr>
         <div class="form-group">
             <label for="inputDescribe" class="col-sm-2">描述</label>
             <div class="col-sm-10">
-                <input type="describe" class="form-control" id="inputDescribe" placeholder="请简要描述一下博客内容">
+                <input type="text" class="form-control" name="des"
+                       id="inputDescribe" placeholder="请简要描述一下博客内容">
             </div>
         </div>
         <hr>
         <div class="form-group">
             <label for="inputContent" class="col-sm-2">内容</label>
             <div class="col-sm-10">
-                <textarea class="form-control"
-                          rows="20"
+                <textarea class="form-control" rows="20"
+                          name="content"
                           id="inputContent" placeholder="请输入内容">
                 </textarea>
             </div>
@@ -52,11 +54,10 @@
         <div class="container" align="center">
             <div class="col-sm-offset-2 col-sm-8">
                 <button type="submit" class="btn btn-primary">提交</button>
-                <a class="btn btn-default" href="#" role="button">返回</a>
+                <a class="btn btn-default" href="/toBlogs" role="button">返回</a>
             </div>
         </div>
     </form>
 </div>
-
 </body>
 </html>

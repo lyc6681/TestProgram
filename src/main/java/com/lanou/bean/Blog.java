@@ -9,7 +9,7 @@ public class Blog {
     private String title;
     private String des;
     private String content;
-    private User user;
+    private User user;//发贴人
 
     @Override
     public String toString() {
@@ -50,7 +50,7 @@ public class Blog {
         return content;
     }
 
-    public void setContent(String context) {
+    public void setContent(String content) {
         this.content = content;
     }
 

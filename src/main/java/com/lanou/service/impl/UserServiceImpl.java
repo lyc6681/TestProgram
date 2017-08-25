@@ -22,6 +22,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean addUser(User user) {
+        user.setLevel(1);
+        user.setDes("无");
         mapper.addUser(user);
         if (mapper.findById(user.getId())==null){
             return false;

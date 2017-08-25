@@ -21,21 +21,21 @@ public class BlogController {
 
     @Resource
     private BlogService blogService;
-
+    //查找全部
     @RequestMapping(value = "/shwoBlogs")
     @ResponseBody
     public List<Blog> showBlogs(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("account");
-        List<Blog> blogs = blogService.findByUId(user.getId());
-        return blogs;
+        return blogService.findByUId(user.getId());
     }
-
+    //删除
     @RequestMapping(value = "/deleteBlog")
-    public String delete(@Param("blogId") Integer id) {
+    @ResponseBody
+    public Blog delete(@RequestParam("id") Integer id) {
         blogService.deleteBlog(id);
-        return "users/index";
+        return null;
     }
-
+    //修改
     @RequestMapping(value = "/updateBlog")
     public String updateBlog(Blog blog, HttpServletRequest request) {
         if (blog.getId() == null) {
@@ -45,13 +45,38 @@ public class BlogController {
         } else {
             return blogService.update(blog);
         }
-        return "users/index";
+        return "blogs/showblogs";
     }
+    //高级搜索
     @RequestMapping(value = "/search")
     @ResponseBody
-    public List<Blog> findByInfo(@RequestParam("search")String str,HttpServletRequest request){
+    public List<Blog> findByInfo(@RequestParam("searchInfo")String str,HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("account");
+        System.out.println(user);
         List<Blog> blogs = blogService.findByInfo(user.getId(), str);
+        System.out.println(blogs);
+        return blogs;
+    }
+    //去添加
+    @RequestMapping(value = "/toAddBlogs")
+    public String toAddBlogs(){
+        return "blogs/addblogs";
+    }
+    //跳转展示多个
+    @RequestMapping(value = "/toBlogs")
+    public String toBlogs(){
+        return "blogs/showblogs";
+    }
+    //跳转展示一个
+    @RequestMapping(value = "/toBlog")
+    public String toBlog(){
+        return "blogs/blogs";
+    }
+    //获取所选的一个
+    @RequestMapping(value = "/findBlogById")
+    @ResponseBody
+    public Blog findById(@RequestParam("tid") Integer id){
+        Blog blogs = blogService.findById(id);
         return blogs;
     }
 

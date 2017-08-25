@@ -14,9 +14,9 @@
 </head>
 <body>
 <div class="container">
-    <h3>这是标题</h3>
+    <h3>${param.title}</h3>
     <hr>
-    <p>富强</p>
+    <p>${param.content}</p>
 </div>
 </body>
 </html>

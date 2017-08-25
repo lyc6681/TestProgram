@@ -13,7 +13,7 @@ public class MainController {
     @RequestMapping(value = "/")
     public String frontPage(){
 
-
+        //首页方法
         return "users/login";
     }
 

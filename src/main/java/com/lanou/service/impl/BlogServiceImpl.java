@@ -18,11 +18,13 @@ public class BlogServiceImpl implements BlogService {
 
 
     public List<Blog> findByUId(Integer id) {
-        return mapper.findByUId(id);
+        List<Blog> byUId = mapper.findByUId(id);
+        return byUId;
     }
 
-    public void deleteBlog(Integer id) {
+    public Integer deleteBlog(Integer id) {
         mapper.deleteBlog(id);
+        return id;
     }
 
     public String update(Blog blog) {
@@ -39,5 +41,10 @@ public class BlogServiceImpl implements BlogService {
 
     public List<Blog> findByInfo(Integer id, String string) {
         return mapper.findByInfo(id,string);
+    }
+
+    public Blog findById(Integer id) {
+        Blog blogs = mapper.findById(id);
+        return blogs;
     }
 }
