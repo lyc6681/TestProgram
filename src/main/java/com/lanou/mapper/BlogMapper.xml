@@ -34,12 +34,14 @@
         INSERT INTO b_blog VALUES (NULL ,#{title},#{des},#{content},#{user.id})
     </insert>
 
-    <select id="findByInfo" resultMap="BlogMap1" parameterType="String">
-        SELECT * FROM b_blog WHERE userId = #{id} And (title like CONCAT('%', #{string}, '%')  OR des like CONCAT('%', #{string}, '%') OR content like CONCAT('%', #{string}, '%'))
+    <select id="findByInfo" resultMap="BlogMap1">
+        SELECT * FROM b_blog WHERE (title like CONCAT('%', #{string}, '%')
+        OR des like CONCAT('%', #{string}, '%')
+        OR content like CONCAT('%', #{string}, '%'))And userId = #{id}
     </select>
-
-
-
+    <select id="findById" resultMap="BlogMap1">
+        SELECT * FROM b_blog WHERE id=#{id}
+    </select>
 
 
 </mapper>

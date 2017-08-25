@@ -42,4 +42,9 @@ public class BlogServiceImpl implements BlogService {
     public List<Blog> findByInfo(Integer id, String string) {
         return mapper.findByInfo(id,string);
     }
+
+    public Blog findById(Integer id) {
+        Blog blogs = mapper.findById(id);
+        return blogs;
+    }
 }

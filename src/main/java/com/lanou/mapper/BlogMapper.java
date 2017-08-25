@@ -16,6 +16,7 @@ public interface BlogMapper {
     Integer deleteBlog(Integer id);
     int update(Blog blog);
     void addBlog(Blog blog);
-    List<Blog> findByInfo(@Param("id")Integer id,String string);
+    List<Blog> findByInfo(@Param("id")Integer id,@Param("string")String string);
 
+    Blog findById(Integer id);
 }

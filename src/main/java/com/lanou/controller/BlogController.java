@@ -32,7 +32,6 @@ public class BlogController {
     @RequestMapping(value = "/deleteBlog")
     @ResponseBody
     public Blog delete(@RequestParam("id") Integer id) {
-        System.out.println(id);
         blogService.deleteBlog(id);
         return null;
     }
@@ -51,9 +50,11 @@ public class BlogController {
     //高级搜索
     @RequestMapping(value = "/search")
     @ResponseBody
-    public List<Blog> findByInfo(@RequestParam("search")String str,HttpServletRequest request){
+    public List<Blog> findByInfo(@RequestParam("searchInfo")String str,HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("account");
+        System.out.println(user);
         List<Blog> blogs = blogService.findByInfo(user.getId(), str);
+        System.out.println(blogs);
         return blogs;
     }
     //去添加
@@ -61,12 +62,23 @@ public class BlogController {
     public String toAddBlogs(){
         return "blogs/addblogs";
     }
-    //返回跳转
+    //跳转展示多个
     @RequestMapping(value = "/toBlogs")
     public String toBlogs(){
         return "blogs/showblogs";
     }
-
+    //跳转展示一个
+    @RequestMapping(value = "/toBlog")
+    public String toBlog(){
+        return "blogs/blogs";
+    }
+    //获取所选的一个
+    @RequestMapping(value = "/findBlogById")
+    @ResponseBody
+    public Blog findById(@RequestParam("tid") Integer id){
+        Blog blogs = blogService.findById(id);
+        return blogs;
+    }
 
 
 }

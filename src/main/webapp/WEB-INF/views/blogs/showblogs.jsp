@@ -31,11 +31,11 @@
             <ul class="nav navbar-nav">
                 <li><a href="toAddBlogs">新建博客</a></li>
             </ul>
-            <form class="navbar-form navbar-left" method="post" action="/search">
+            <form class="navbar-form navbar-left">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="输入搜索的内容">
+                    <input type="text" id="searchInfo" class="form-control" placeholder="输入搜索的内容">
                 </div>
-                <button type="submit" class="btn btn-default">提交</button>
+                <button id="Sbtn" type="button" class="btn btn-default">提交</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">${account.name}</a></li>
@@ -91,7 +91,7 @@
         var tdRight = $("<td></td>");
         $("<a href='#'>" + title + "</a>").appendTo(tdLeft).attr("showId", id).click(check);
         $("<a href='#'>删除</a>").appendTo(tdRight).attr("delId", id).click(del);
-        var tr = $("<tr></tr>").append(tdLeft).append(tdMid).append(tdRight).attr("id", "tr" + id);
+        var tr = $("<tr class='binfo'></tr>").append(tdLeft).append(tdMid).append(tdRight).attr("id", "tr" + id);
 
         $("#tbody").append(tr);
     }
@@ -99,10 +99,10 @@
     var check = function () {
         var tid = $(this).attr("showId");
         $.ajax({
-            url: "/",
+            url: "/findBlogById",
             data: {tid: tid},
             success: function (result) {
-                window.location.href = "/blogs?title=" + result.title + "&content=" + result.content;
+                window.location.href = "/toBlog?title=" + result.title + "&content=" + result.content;
             }
         })
     };
@@ -136,5 +136,23 @@
             }
         })
     }
+
+    $("#Sbtn").click(function () {
+        $.ajax({
+            url: "/search",
+            type: "get",
+            data: {
+                searchInfo: $("#searchInfo").val()
+            },
+            success: function (result) {
+                $(".binfo").remove();
+                for (var i = 0; i < result.length; i++) {
+                    //遍历返回的数据,一次在table中添加一行
+                    var msg = result[i];
+                    addBolg(msg.id, msg.title, msg.des)
+                }
+            }
+        })
+    })
 </script>
 </html>
