@@ -14,9 +14,10 @@
 </head>
 <body>
 <div class="container">
-    <h3>这是标题</h3>
+    <h3>${blog.title}</h3>
     <hr>
-    <p>富强</p>
+    <p>${blog.des}</p><br/>
+    <p>${blog.content}</p>
 </div>
 </body>
 </html>

@@ -23,7 +23,7 @@ public class UserController {
         }else {
             User user1 = userService.findBypassword(user);
             request.getSession().setAttribute("account",user1);
-            return "users/index";
+            return "blogs/showblogs";
         }
     }
 
@@ -37,7 +37,7 @@ public class UserController {
        if (userService.addUser(user)){
            return "users/login";
        }
-        return "users/register";
+        return "blogs/showblogs";
     }
 
     @RequestMapping(value = "/checkout")

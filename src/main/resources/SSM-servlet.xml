@@ -17,10 +17,11 @@
     </bean>
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/*"/>
             <mvc:exclude-mapping path="/register"/>
             <mvc:exclude-mapping path="/toRegister"/>
             <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/search"/>
             <bean class="com.lanou.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

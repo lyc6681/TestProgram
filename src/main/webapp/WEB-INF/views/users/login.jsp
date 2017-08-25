@@ -46,17 +46,13 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-default">登录</button>
-                <button id="btn" class="btn btn-default" type="button">注册</button>
+                <a class="btn btn-default" href="/toRegister" role="button">注册</a>
             </div>
         </form>
     </div>
 </div>
 </body>
 <script>
-    $("#btn").click(function () {
-        $.ajax({
-            url: "/toRegister"})
-    });
 
 </script>
 </html>
